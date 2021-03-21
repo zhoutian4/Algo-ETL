@@ -92,5 +92,10 @@ class DB_Conn:
                         '", "Something is wrong when executing the db_func", "' + str(e) + '"\n')
 
 
+def connect_to_db():
+    db_conn = DB_Conn()
+    return db_conn.create_connection()
+
+
 if __name__ == "__Main__":
     pass
