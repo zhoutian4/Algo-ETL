@@ -72,7 +72,7 @@ def get_valid_dates(conn,
                     date_from=(datetime.now() - timedelta(days=180)).strftime("%Y-%m-%d"),
                     date_until=datetime.now().strftime("%Y-%m-%d")):
     valid_date_df = pd.read_sql(f"SELECT * FROM valid_dates "
-                                f"where date_int_key between {date_from} AND {date_until}", conn)
+                                f"where date_int_key between '{date_from}' AND '{date_until}'", conn)
     return valid_date_df['date_int_key'].tolist()
 
 
