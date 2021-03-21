@@ -46,10 +46,11 @@ def candle_stick(ticker, start_date=(datetime.now() - timedelta(days=1)).strftim
 
 
 if __name__ == "__main__":
-    print(datetime.now().strftime("%Y-%m-%d"))
-    print((datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d"))
-    # candle_stick_daily('TSLA')
-    candle_stick('TSLA', '2021-03-18', '2021-03-19')
-    # tkr = yf.Ticker('TSLA')
-    # stock = tkr.history(interval="1m", start='2021-03-18', end='2021-03-19')
-    # print(stock.head(5))
+    # print(datetime.now().strftime("%Y-%m-%d"))
+    # print((datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d"))
+    # # candle_stick_daily('TSLA')
+    # candle_stick('TSLA', '2021-03-18', '2021-03-19')
+    # # tkr = yf.Ticker('TSLA')
+    # # stock = tkr.history(interval="1m", start='2021-03-18', end='2021-03-19')
+    # # print(stock.head(5))
+    pass
