@@ -9,7 +9,9 @@ import matplotlib.dates as mpldates
 import mplfinance as mpf
 
 
-def candle_stick_daily(ticker, start_date=(datetime.now() - timedelta(days=60)).strftime("%Y-%m-%d"), end_date=datetime.now().strftime("%Y-%m-%d")):
+def candle_stick_daily(ticker, start_date=(datetime.now() - timedelta(days=60)).strftime("%Y%m%d"), end_date=datetime.now().strftime("%Y%m%d")):
+    start_date = datetime.strptime(str(start_date), '%Y%m%d').strftime('%Y-%m-%d')
+    end_date = datetime.strptime(str(end_date), '%Y%m%d').strftime('%Y-%m-%d')
     tkr = yf.Ticker(ticker)
     stock = tkr.history(interval="1d", start=start_date, end=end_date)
     stock.drop(columns=['Dividends', 'Stock Splits'], inplace=True)
@@ -32,7 +34,9 @@ Date
     pass
 
 
-def candle_stick(ticker, start_date=(datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d"), end_date=datetime.now().strftime("%Y-%m-%d")):
+def candle_stick(ticker, start_date=(datetime.now() - timedelta(days=1)).strftime("%Y%m%d"), end_date=datetime.now().strftime("%Y%m%d")):
+    start_date = datetime.strptime(str(start_date), '%Y%m%d').strftime('%Y-%m-%d')
+    end_date = datetime.strptime(str(end_date), '%Y%m%d').strftime('%Y-%m-%d')
     tkr = yf.Ticker(ticker)
     stock = tkr.history(interval="1m", start=start_date, end=end_date)
     stock.drop(columns=['Dividends', 'Stock Splits'], inplace=True)

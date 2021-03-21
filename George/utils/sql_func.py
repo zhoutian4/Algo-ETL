@@ -58,6 +58,7 @@ def insert_df_to_db_iter(df, table_name="split", _conn=conn):
 
 def get_symbol_close_price(symbol, table_name, date=None, _conn=conn):
     if date is None:
+
         date = get_symbol_max_date(symbol, table_name)
     close_price = pd.read_sql(f"select max(close_price) as close_price from {table_name} "
                        f"where symbol = '{symbol}' and date_int_key = '{date}'", _conn)
@@ -71,9 +72,11 @@ def get_symbol_max_date(symbol, table_name, _conn=conn):
 def get_valid_dates(conn,
                     date_from=(datetime.now() - timedelta(days=180)).strftime("%Y-%m-%d"),
                     date_until=datetime.now().strftime("%Y-%m-%d")):
+    start_date = datetime.strptime(str(date_from), '%Y%m%d').strftime('%Y-%m-%d')
+    end_date = datetime.strptime(str(date_until), '%Y%m%d').strftime('%Y-%m-%d')
     valid_date_df = pd.read_sql(f"SELECT * FROM valid_dates "
                                 f"where date_int_key between '{date_from}' AND '{date_until}'", conn)
-    return valid_date_df['date_int_key'].apply(lambda x: x.strftime('%Y-%m-%d')).tolist()
+    return valid_date_df['date_int_key'].apply(lambda x: x.strftime('%Y%m%d')).astype(int).tolist()
 
 
 
