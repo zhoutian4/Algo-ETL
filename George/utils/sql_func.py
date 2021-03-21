@@ -75,3 +75,4 @@ def get_valid_dates(conn,
                                 f"where date_int_key between {date_from} AND {date_until}", conn)
     return valid_date_df['date_int_key'].tolist()
 
+
