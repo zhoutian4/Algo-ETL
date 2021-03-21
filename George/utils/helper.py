@@ -17,3 +17,7 @@ def get_last_timestamp(ticker, current_timestamp_df):
         return last_timestamp
     except KeyError:
         return last_timestamp
+
+def read_sec_list(file_name):
+    return pd.read_csv(Path(__file__).parent / f"../config/{file_name}")['ticker'].tolist()
+
