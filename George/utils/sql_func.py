@@ -83,7 +83,7 @@ def download_data_daily(conn, security_symbol, start_date, end_date, interval='d
     start_date = datetime.strptime(str(start_date), '%Y%m%d').strftime('%Y-%m-%d')
     end_date = datetime.strptime(str(end_date), '%Y%m%d').strftime('%Y-%m-%d')
     return pd.read_sql(f"SELECT * FROM us_equity_finn_daily "
-                       f"where symbol='{security_symbol}' AND (date_int_key between '{start_date}' AND '{end_date}'order by date_int_key ASC)", conn)
+                       f"where symbol='{security_symbol}' AND (date_int_key between '{start_date}' AND '{end_date}' order by date_int_key ASC)", conn)
 
 
 
