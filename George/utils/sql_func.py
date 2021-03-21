@@ -82,9 +82,11 @@ def get_valid_dates(conn,
 def download_data_daily(conn, security_symbol, start_date, end_date, interval='daily'):
     start_date = datetime.strptime(str(start_date), '%Y%m%d').strftime('%Y-%m-%d')
     end_date = datetime.strptime(str(end_date), '%Y%m%d').strftime('%Y-%m-%d')
-    return pd.read_sql(f"SELECT * FROM us_equity_finn_daily "
+    daily_data = pd.read_sql(f"SELECT * FROM us_equity_finn_daily "
                        f"where symbol='{security_symbol}' AND (date_int_key between '{start_date}' AND '{end_date}') order by date_int_key ASC", conn)
-
+    daily_data.drop(columns=['symbol', 'id','timestamp', 'finn_timestamp'], inplace=True)
+    daily_data['date_int_key'] = daily_data['date_int_key'].apply(lambda x: x.strftime('%Y%m%d')).astype(int)
+    return daily_data
 
 
 if __name__ == "__main__":
