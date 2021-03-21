@@ -1,6 +1,6 @@
 import pandas as pd
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from dateutil.parser import parse
 
@@ -66,3 +66,12 @@ def get_symbol_close_price(symbol, table_name, date=None, _conn=conn):
 def get_symbol_max_date(symbol, table_name, _conn=conn):
     max_date = pd.read_sql(f"select max(date_int_key) as max_date from {table_name} where symbol = '{symbol}'", _conn)
     return max_date.iloc[0, 0]
+
+
+def get_valid_dates(conn,
+                    date_from=(datetime.now() - timedelta(days=180)).strftime("%Y-%m-%d"),
+                    date_until=datetime.now().strftime("%Y-%m-%d")):
+    valid_date_df = pd.read_sql(f"SELECT * FROM valid_dates "
+                                f"where date_int_key between {date_from} AND {date_until}", conn)
+    return valid_date_df['date_int_key'].tolist()
+
