@@ -74,27 +74,27 @@ def algo_etl_main_control(candle_freq_list=["D"]):
         if error_flag == 0:
            send_sms("Algo-Trading executed correctly, Started at: " + str(start_time) + "\n Finished at: "
                     + str(datetime.today()) + "\ntickers processed: " + str(ticker_success))
-           send_email("Algo-Trading executed correctly", "Started at: " + str(start_time) + "\n Finished at: "
-                      + str(datetime.today()) + "\ntickers processed: "
-                      + str(ticker_success)+ "\n Algo trading executed successfully")
+           # send_email("Algo-Trading executed correctly", "Started at: " + str(start_time) + "\n Finished at: "
+           #            + str(datetime.today()) + "\ntickers processed: "
+           #            + str(ticker_success)+ "\n Algo trading executed successfully")
         else:
             if execution_result == "Success":
-                send_email("Algo-Trading executed finished with " + str(error_num) + " error(s)!",
-                           "Algo-Trading executed finished with " + str(error_num)
-                           + " error(s)! \nStarted at: " + str(start_time) + "\n Finished at: "
-                           + str(datetime.today()) + "\ntickers processed: " + str(ticker_success)
-                           + "\n tickers list cannot update: " + str(ticker_no_data))
+                # send_email("Algo-Trading executed finished with " + str(error_num) + " error(s)!",
+                #            "Algo-Trading executed finished with " + str(error_num)
+                #            + " error(s)! \nStarted at: " + str(start_time) + "\n Finished at: "
+                #            + str(datetime.today()) + "\ntickers processed: " + str(ticker_success)
+                #            + "\n tickers list cannot update: " + str(ticker_no_data))
 
                 send_sms("Algo-Trading execution finished with " + str(error_num)
                          + " error(s), \nStarted at: " + str(start_time) + "\n Finished at: "
                         + str(datetime.today()) + "\ntickers proceessed: " + str(ticker_success))
             else:
-                send_email("Algo-Trading executed finished with " + str(error_num)
-                           + " error(s)!", "Algo-Trading executed finished with " + str(error_num)
-                           + " error(s)! \nStarted at: " + str(start_time) + "\n Finished at: "
-                           + str(datetime.today()) + "\ntickers processed: " + str(ticker_success)
-                           + "\n tickers list cannot update: " + str(ticker_no_data)
-                           + '\nLast Error detail: "' + str(execution_result))
+                # send_email("Algo-Trading executed finished with " + str(error_num)
+                #            + " error(s)!", "Algo-Trading executed finished with " + str(error_num)
+                #            + " error(s)! \nStarted at: " + str(start_time) + "\n Finished at: "
+                #            + str(datetime.today()) + "\ntickers processed: " + str(ticker_success)
+                #            + "\n tickers list cannot update: " + str(ticker_no_data)
+                #            + '\nLast Error detail: "' + str(execution_result))
                 send_sms("Algo-Trading execution finished with " + str(error_num)
                          + " error(s), \nStarted at: " + str(start_time) + "\n Finished at: "
                          + str(datetime.today()) + "\ntickers processed: " + str(ticker_success)
