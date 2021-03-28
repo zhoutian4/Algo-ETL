@@ -89,6 +89,30 @@ def download_data_daily(conn, security_symbol, start_date, end_date, interval='d
     return daily_data
 
 
+def get_latest_datadate(conn=conn):
+    max_date = pd.read_sql("select max(date_int_key) from us_equity_finn_daily", conn)
+    return max_date.iloc[0][0]
+
+
+def calculate_high():
+    pass
+
+def insert_purchase(stock_purchase, table_name="stock_purchase", conn=conn):
+    with conn.cursor() as cursor:
+        for index, row in stock_purchase.iterrows():
+            cursor.execute(f"INSERT INTO stock_purchase (ticker, mean, std, ranks, buying_date, sale_interval, sold) VALUES ('{row.ticker}', {row['mean']}, {row['std']}, {row['ranks']}, '{row.buying_date}', {row.sale_interval}, {row.sold})")
+        conn.commit()
+
+
+def get_all_slice_size(conn, table_name="stock_purchase"):
+    sold_interval = pd.read_sql(f"select sale_interval, count(*) as count_number from {table_name} where sold=0 group by sale_interval order by sale_interval ASC", conn)
+    return sold_interval
+
+def get_stock_buy_df_by_buy_date(conn, buy_date, table_name="stock_purchase"):
+    stock_list = pd.read_sql(f"select * from {table_name} where buying_date = '{buy_date}'",conn)
+    return stock_list
+
 if __name__ == "__main__":
-    print(download_data_daily(conn, 'TSLA', 20201208, 20210108))
+    #print(download_data_daily(conn, 'TSLA', 20201208, 20210108))
+    print(get_latest_datadate())
     pass
