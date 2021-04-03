@@ -6,8 +6,8 @@ from utils.sql_func import *
 
 
 if __name__ == "__main__":
-    # today = int(datetime.now().strftime("%Y%m%d"))
-    today = 20210326
+    today = int(datetime.now().strftime("%Y%m%d"))
+    # today = 20210326
     ticker_list = get_buy_ticker(today, validate_days=270, slice_size=10, top_buy=3)
     print("check to buy list", "\n", ticker_list)
 
