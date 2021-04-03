@@ -2,9 +2,9 @@ import math
 import datetime
 import numpy as np
 from utils.params import *
-import OrderSamples
-import ContractSamples
-import AvailableAlgoParams
+import execution.OrderSamples as OrderSamples
+import execution.ContractSamples as ContractSamples
+import execution.AvailableAlgoParams as AvailableAlgoParams
 from collections import deque
 from ibapi.order import Order
 from ibapi.client import EClient
@@ -95,8 +95,21 @@ class IBapiTest(EWrapper, EClient):
         return vwap
 
 
-    def algo_order(self, action:str, quantity:int):
+    def algo_order(self, ticker, action:str, quantity:int):
+        """
+        action is "BUY" or "SELL"
+        """
         baseOrder = OrderSamples.MarketOrder(action, quantity)
         AvailableAlgoParams.FillAdaptiveParams(baseOrder, "Normal")
-        self.placeOrder(self.nextOrderId(), ContractSamples.USStockAtSmart(), baseOrder)
+        self.placeOrder(self.nextValidOrderId, ContractSamples.USStockAtSmart(ticker), baseOrder)
 
+    def cancel_all_orders(self): #cancel all orders
+        self.reqGlobalCancel()
+
+    def request_historic_data(self, ticker):
+        """
+        ERROR 4102 162 Historical Market Data Service error message:No market data permissions for ISLAND STK
+        """
+        queryTime = (datetime.datetime.today() - datetime.timedelta(days=2)).strftime("%Y%m%d %H:%M:%S")
+        self.reqHistoricalData(4102, ContractSamples.USStockAtSmart(ticker), queryTime,
+                               "1 D", "1 min", "TRADES", 1, 1, False, [])

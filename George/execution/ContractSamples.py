@@ -656,6 +656,13 @@ def Test():
     from ibapi.utils import ExerciseStaticMethods
     ExerciseStaticMethods(ContractSamples)
 
+def USStockAtSmart(ticker):
+    contract = Contract()
+    contract.symbol = ticker
+    contract.secType = "STK"
+    contract.currency = "USD"
+    contract.exchange = "SMART"
+    return contract
 
 if "__main__" == __name__:
     Test()

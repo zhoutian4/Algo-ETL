@@ -11,12 +11,12 @@ PRY_XCH = {
 }
 
 if DEBUG:
-    ACCOUNT = ""  # paper trading
-    IBIP = ''
+    ACCOUNT = "DU3739057"  # paper trading
+    IBIP = '127.0.0.1'
     PORT = 7497
 else:
     ACCOUNT = ""  # prod trading
-    IBIP = ''
+    IBIP = '127.0.0.1'
     PORT = 7496
 
 STP_BUY_HR = 15

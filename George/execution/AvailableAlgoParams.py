@@ -320,5 +320,12 @@ def Test():
     av = AvailableAlgoParams() # @UnusedVariable
 
 
+# @staticmethod
+def FillAdaptiveParams(baseOrder: Order, priority: str):
+    baseOrder.algoStrategy = "Adaptive"
+    baseOrder.algoParams = []
+    baseOrder.algoParams.append(TagValue("adaptivePriority", priority))
+
+
 if "__main__" == __name__:
     Test()
