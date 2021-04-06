@@ -12,5 +12,3 @@ db: Algo_Trade
 Stock_manager.py is the main entrance point for finding the stocks to trade.
 afterwards execute main_testbed.py to execute order.
 
-Functions:
-1, 5, 6, 7

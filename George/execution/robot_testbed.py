@@ -113,3 +113,22 @@ class IBapiTest(EWrapper, EClient):
         queryTime = (datetime.datetime.today() - datetime.timedelta(days=2)).strftime("%Y%m%d %H:%M:%S")
         self.reqHistoricalData(4102, ContractSamples.USStockAtSmart(ticker), queryTime,
                                "1 D", "1 min", "TRADES", 1, 1, False, [])
+
+    def tickPrice(self, reqId, tickType, price, attrib):
+        super().tickPrice(reqId, tickType, price, attrib)
+        if reqId == 1:
+            if tickType == 68:
+                print(f"The last trade price is {price} "
+                      f"at time {datetime.datetime.now()-datetime.timedelta(minutes=15)}")
+            elif tickType == 76:
+                print(f"Today ({datetime.datetime.today()}) opening price is {price}")
+            elif tickType == 75:
+                print(f"Yesterday ({datetime.datetime.today() - datetime.timedelta(days=1)}) "
+                      f"closing price is {price}")
+        else:
+            print("reqid is not 1 and need further testing")
+
+
+    def get_stock_price(self, ticker):
+        print(f"now getting {ticker} price infos:")
+        self.reqMktData(1, ContractSamples.USStockAtSmart(ticker), "", False, False, [])
