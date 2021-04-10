@@ -36,14 +36,14 @@ def execution_main():
 
     time.sleep(1)
 
-    # ticker_to_buy = pd.read_csv("logs/ticker_to_buy.csv")
-    # ticker_to_sell = pd.read_csv("logs/ticker_to_sell.csv")
+    ticker_to_buy = pd.read_csv("logs/ticker_to_buy.csv")
+    ticker_to_sell = pd.read_csv("logs/ticker_to_sell.csv")
 
-    # if len(ticker_to_buy) > 0:
-    #     for index, row in ticker_to_buy.iterrows():
-    #         ticker = row.ticker
-    #         quantity = 100 # need to update quantity based on buying power and stock pricing after fixing getting the trading value
-    #         app.algo_order(ticker, "BUY", quantity) #
+    if len(ticker_to_buy) > 0:
+        for index, row in ticker_to_buy.iterrows():
+            ticker = row.ticker
+            quantity = 100 # need to update quantity based on buying power and stock pricing after fixing getting the trading value
+            app.algo_order(ticker, "BUY", quantity) #
 
 
     app.nextValidId(orderid)
